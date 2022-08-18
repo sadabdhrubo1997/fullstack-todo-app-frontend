@@ -9,11 +9,11 @@ import TodoLogo from '../icons/TodoLogo';
 const Sidebar: FC = () => {
   return (
     <Wrapper>
-      <LogoWrapper to="/">
+      <LogoWrapper to="/dashboard">
         <TodoLogo width={25} />
         <span>Todo</span>
       </LogoWrapper>
-      <MenuLink to="/">
+      <MenuLink to="/dashboard">
         <MenuDashboardIcon width={20} /> Dashboard
       </MenuLink>
       <MenuLink to="/todos">

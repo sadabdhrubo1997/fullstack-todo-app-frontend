@@ -5,14 +5,14 @@ import { Input, Textarea } from '../../../styles/common';
 import { InputTitle, SingleInputWrapper } from './Styles';
 
 interface IProps {
-  setShowEditModal: (v: boolean) => void;
-  showEditModal: boolean;
+  setShowTitleDescriptionEditModal: (v: boolean) => void;
+  showTitleDescriptionEditModal: boolean;
   // data: any;
 }
 
 const EditTitleDescriptionModal = ({
-  setShowEditModal,
-  showEditModal,
+  setShowTitleDescriptionEditModal,
+  showTitleDescriptionEditModal,
 }: // handleAddSubTask,
 IProps) => {
   const [title, setTitle] = useState<string>('');
@@ -31,30 +31,30 @@ IProps) => {
   //   });
   //   setTitle('');
   //   setDescription('');
-  //   setShowEditModal(false);
+  //   setShowTitleDescriptionEditModal(false);
   // };
 
-  const handleUpdate = ()=>{
-    console.log("update todo title description handler firing")
-  }
+  const handleUpdate = () => {
+    console.log('update todo title description handler firing');
+  };
 
   const handleCancel = () => {
     setTitle('');
     setDescription('');
-    setShowEditModal(false);
+    setShowTitleDescriptionEditModal(false);
   };
 
   return (
     <>
       <Modal
-        title="Add Sub Task"
-        visible={showEditModal}
+        title="Update Title and Description"
+        visible={showTitleDescriptionEditModal}
         onOk={handleUpdate}
         onCancel={handleCancel}
-        okText="Add"
+        okText="Save"
       >
         <SingleInputWrapper>
-          <InputTitle>Sub Task Title</InputTitle>
+          <InputTitle>Todo Title</InputTitle>
           <Input
             name="title"
             value={title}
@@ -65,7 +65,7 @@ IProps) => {
           />
         </SingleInputWrapper>
         <SingleInputWrapper>
-          <InputTitle>Sub Task Description</InputTitle>
+          <InputTitle>Todo Description</InputTitle>
           <Textarea
             name="description"
             value={description}

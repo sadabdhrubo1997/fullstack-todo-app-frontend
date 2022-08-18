@@ -1,18 +1,18 @@
 import { Modal } from 'antd';
 import { useState } from 'react';
-import { ISubTaskCreate } from '../../constants/interfaces';
+import { ISubTaskToAdd } from '../../constants/interfaces';
 import { Input, Textarea } from '../../styles/common';
 import { InputTitle, SingleInputWrapper } from './Styles';
 
 interface IProps {
-  setShowSubTaskCreateModal: (v: boolean) => void;
-  showSubTaskCreateModal: boolean;
-  handleAddSubTask: (v: ISubTaskCreate) => void;
+  setShowSubTaskAddModal: (v: boolean) => void;
+  showSubTaskAddModal: boolean;
+  handleAddSubTask: (v: ISubTaskToAdd) => void;
 }
 
-const SubTaskCreateModal = ({
-  setShowSubTaskCreateModal,
-  showSubTaskCreateModal,
+const SubTaskAddModal = ({
+  setShowSubTaskAddModal,
+  showSubTaskAddModal,
   handleAddSubTask,
 }: IProps) => {
   const [title, setTitle] = useState<string>('');
@@ -20,6 +20,7 @@ const SubTaskCreateModal = ({
 
   const handleAddSubTaskWithOk = () => {
     handleAddSubTask({
+      taskId: '100',
       title,
       description,
       id: Date.now(),
@@ -31,20 +32,20 @@ const SubTaskCreateModal = ({
     });
     setTitle('');
     setDescription('');
-    setShowSubTaskCreateModal(false);
+    setShowSubTaskAddModal(false);
   };
 
   const handleCancel = () => {
     setTitle('');
     setDescription('');
-    setShowSubTaskCreateModal(false);
+    setShowSubTaskAddModal(false);
   };
 
   return (
     <>
       <Modal
         title="Add Sub Task"
-        visible={showSubTaskCreateModal}
+        visible={showSubTaskAddModal}
         onOk={handleAddSubTaskWithOk}
         onCancel={handleCancel}
         okText="Add"
@@ -76,4 +77,4 @@ const SubTaskCreateModal = ({
   );
 };
 
-export default SubTaskCreateModal;
+export default SubTaskAddModal;

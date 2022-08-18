@@ -14,7 +14,6 @@ export const StatusWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
 `;
 
 export const StatusText = styled.div`
@@ -40,4 +39,16 @@ export const StatusActionButton = styled.span<any>``;
 
 export const DeleteActionButton = styled(StatusActionButton)`
   color: red;
+`;
+
+export const ProgressWrapper = styled.div`
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  /* display:none; */
+
+  .ant-progress-circle .ant-progress-text {
+    color: black;
+    user-select: none;
+  }
 `;

@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 import { SyncOutlined } from '@ant-design/icons';
@@ -7,7 +8,7 @@ import Topbar from '../components/Topbar';
 import Sidebar from '../components/Sidebar/index';
 
 interface IProps {
-  children: JSX.Element;
+  children: ReactNode;
   isPageLoading: boolean;
 }
 
@@ -19,6 +20,8 @@ const ProtectedLayout = ({ children, isPageLoading }: IProps) => {
       <Main
         style={{
           maxHeight: '100vh',
+          width: '100vw',
+          overflowX: 'hidden',
         }}
         indicator={antIcon}
         spinning={isPageLoading}

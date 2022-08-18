@@ -12,6 +12,13 @@ export interface ISubTaskCreate extends ICreateTask {
   id: number;
 }
 
+export interface ISubTaskToAdd {
+  taskId: string;
+  id: number;
+  title: string;
+  description: string;
+}
+
 export type TTodosCategory = 'all' | 'ongoing' | 'paused' | 'done';
 
 export type TTodoStatus = 'new' | 'ongoing' | 'paused' | 'done';

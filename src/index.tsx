@@ -1,12 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { createStore, applyMiddleware } from 'redux';
 
 import App from './App';
+import rootReducers from './redux/rootReducers';
 import reportWebVitals from './reportWebVitals';
 // import 'antd/dist/antd.min.css';
 import './styles/App.less';
 import './styles/main.scss';
+
+const store = createStore(rootReducers, {}, applyMiddleware(thunk));
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -14,7 +20,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );

@@ -1,5 +1,5 @@
 const DoneTodoButton = () => {
-  return <>Mark as done</>;
+  return <>Mark as complete</>;
 };
 
 export default DoneTodoButton;

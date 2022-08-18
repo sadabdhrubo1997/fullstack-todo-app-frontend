@@ -5,9 +5,8 @@ import {
   StatusWrapper,
   StatusText,
   ActionButtonWrapper,
+  ProgressWrapper,
 } from './Styles';
-
-
 
 const StatusProgress = () => {
   return (
@@ -19,15 +18,20 @@ const StatusProgress = () => {
             <ActionButtons />
           </ActionButtonWrapper>
         </StatusWrapper>
-        <Progress
-          type="circle"
-          percent={Math.floor(100.5)}
-          width={55}
-          status="exception"
-          // status="normal"
-          //   showInfo={true}
-          strokeColor="blue"
-        />
+        <ProgressWrapper>
+          <Progress
+            type="circle"
+            percent={Math.floor(80.5)}
+            width={100}
+            status="normal"
+            strokeWidth={7}
+            // status="normal"
+            // showInfo={true}
+            // strokeColor="#FFCC00"
+            // strokeColor="#FF4D4F"
+            strokeColor="#339900"
+          />
+        </ProgressWrapper>
       </Wrapper>
     </>
   );

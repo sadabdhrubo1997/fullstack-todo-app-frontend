@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import EditIcon from '../../../components/icons/EditIcon';
+import EditTitleDescriptionModal from './EditTitleDescriptionModal';
 import StatusProgress from './StatusProgress/index';
 import {
   ActionButton,
@@ -9,6 +11,9 @@ import {
 } from './Styles';
 
 const TodoTitleDescription = () => {
+  const [showTitleDescriptionEditModal, setShowTitleDescriptionEditModal] =
+    useState(false);
+
   return (
     <>
       <Wrapper>
@@ -16,9 +21,10 @@ const TodoTitleDescription = () => {
           <Title>
             Todo Title Todo Title Todo TitleTodo TitleTodo Title Todo Title Todo
           </Title>
-
           <div>
-            <ActionButton>
+            <ActionButton
+              onClick={() => setShowTitleDescriptionEditModal(true)}
+            >
               <EditIcon />
               Edit
             </ActionButton>
@@ -35,6 +41,12 @@ const TodoTitleDescription = () => {
         </Description>
       </Wrapper>
       <StatusProgress />
+      <>
+        <EditTitleDescriptionModal
+          setShowTitleDescriptionEditModal={setShowTitleDescriptionEditModal}
+          showTitleDescriptionEditModal={showTitleDescriptionEditModal}
+        />
+      </>
     </>
   );
 };
