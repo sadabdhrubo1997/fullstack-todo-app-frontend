@@ -1,8 +1,8 @@
 import { Pagination } from 'antd';
 import { useState } from 'react';
 import { TTodosCategory } from '../../constants/interfaces';
+import DashboardLayout from '../../layout/DashboardLayout';
 
-import ProtectedLayout from '../../layout/ProtectedLayout';
 import { handleTodosPageHeadingByCategory } from '../../utils/handleTodosPageHeadingByCategory';
 import FilterDropdown from './FilterDropdown';
 import { PaginationWrapper, WrapperTop } from './Styles';
@@ -24,8 +24,7 @@ const TodoPageComponent = () => {
 
   return (
     <>
-      <ProtectedLayout isPageLoading={isLoading}>
-        <>
+        <DashboardLayout>
           <WrapperTop>
             <h2> {handleTodosPageHeadingByCategory(todoCategory)}</h2>
             <FilterDropdown
@@ -46,8 +45,7 @@ const TodoPageComponent = () => {
               onChange={handlePagination}
             />
           </PaginationWrapper>
-        </>
-      </ProtectedLayout>
+        </DashboardLayout>
     </>
   );
 };

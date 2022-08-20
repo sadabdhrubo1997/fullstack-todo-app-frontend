@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ISubTaskToAdd } from '../../constants/interfaces';
+import DashboardLayout from '../../layout/DashboardLayout';
 
-import ProtectedLayout from './../../layout/ProtectedLayout';
 import {
   AddSubTaskButton,
   AddSubTaskButtonWrapper,
@@ -48,7 +48,7 @@ const SingleTodoPageComponent = () => {
 
   return (
     <>
-      <ProtectedLayout isPageLoading={false}>
+      <DashboardLayout>
         <Wrapper>
           <TodoTitleDescription />
           <SubTasks
@@ -73,7 +73,7 @@ const SingleTodoPageComponent = () => {
             />
           </>
         </Wrapper>
-      </ProtectedLayout>
+      </DashboardLayout>
     </>
   );
 };

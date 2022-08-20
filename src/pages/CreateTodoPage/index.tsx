@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import ProtectedLayout from '../../layout/ProtectedLayout';
 import CreateTodoPageComponent from '../../pageComponents/CreateTodoPageComponent';
 
 const CreateTodoPage = () => {
@@ -8,9 +7,7 @@ const CreateTodoPage = () => {
 
   return (
     <>
-      <ProtectedLayout isPageLoading={isCreateTodoPageLoading}>
         <CreateTodoPageComponent setIsCreateTodoPageLoading={setIsCreateTodoPageLoading} />
-      </ProtectedLayout>
     </>
   );
 };

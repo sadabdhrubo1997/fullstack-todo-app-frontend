@@ -86,3 +86,10 @@ export const Button = styled.div<any>`
     background-color: var(--color-primary-deep1);
   }
 `;
+
+export const InputErrorText = styled.p`
+  text-align: center;
+  color: #ff2233;
+  font-weight: 500;
+  margin: 10px 0;
+`;

@@ -14,6 +14,7 @@ import {
 
 import SubTaskCreateModal from './SubTaskCreateModal';
 import SubTasks from './SubTasks';
+import DashboardLayout from './../../layout/DashboardLayout';
 
 interface IProps {
   setIsCreateTodoPageLoading: (v: boolean) => void;
@@ -55,41 +56,45 @@ const CreateTodoPageComponent = ({ setIsCreateTodoPageLoading }: IProps) => {
 
   return (
     <>
-      <Wrapper>
-        <TodoTitleAndDescriptionWrapper>
-          <SingleInputWrapper>
-            <InputTitle>Todo Title</InputTitle>
-            <Input
-              name="title"
-              value={todo?.title}
-              onChange={handleTodoInputChange}
-              placeholder="Enter todo title here..."
-            />
-          </SingleInputWrapper>
-          <SingleInputWrapper>
-            <InputTitle>Todo Description</InputTitle>
-            <Textarea
-              name="description"
-              value={todo?.description}
-              onChange={handleTodoInputChange}
-              placeholder="Enter todo description here..."
-            />
-          </SingleInputWrapper>
-        </TodoTitleAndDescriptionWrapper>
-        <SubTaskWrapper>
-          <SubTasks subTasks={subTasks} setSubTasks={setSubTasks} />
-          <AddSubTaskButtonWrapper>
-            <AddSubTaskButton
-              visible={todo?.title?.length > 0 && todo?.description?.length > 0}
-              onClick={() => setShowSubTaskCreateModal(true)}
-            >
-              Add Sub Task
-            </AddSubTaskButton>
-          </AddSubTaskButtonWrapper>
-        </SubTaskWrapper>
+      <DashboardLayout>
+        <Wrapper>
+          <TodoTitleAndDescriptionWrapper>
+            <SingleInputWrapper>
+              <InputTitle>Todo Title</InputTitle>
+              <Input
+                name="title"
+                value={todo?.title}
+                onChange={handleTodoInputChange}
+                placeholder="Enter todo title here..."
+              />
+            </SingleInputWrapper>
+            <SingleInputWrapper>
+              <InputTitle>Todo Description</InputTitle>
+              <Textarea
+                name="description"
+                value={todo?.description}
+                onChange={handleTodoInputChange}
+                placeholder="Enter todo description here..."
+              />
+            </SingleInputWrapper>
+          </TodoTitleAndDescriptionWrapper>
+          <SubTaskWrapper>
+            <SubTasks subTasks={subTasks} setSubTasks={setSubTasks} />
+            <AddSubTaskButtonWrapper>
+              <AddSubTaskButton
+                visible={
+                  todo?.title?.length > 0 && todo?.description?.length > 0
+                }
+                onClick={() => setShowSubTaskCreateModal(true)}
+              >
+                Add Sub Task
+              </AddSubTaskButton>
+            </AddSubTaskButtonWrapper>
+          </SubTaskWrapper>
 
-        <Button onClick={handleCreateTodo}>Create Todo</Button>
-      </Wrapper>
+          <Button onClick={handleCreateTodo}>Create Todo</Button>
+        </Wrapper>
+      </DashboardLayout>
       <>
         <SubTaskCreateModal
           handleAddSubTask={handleAddSubTask}

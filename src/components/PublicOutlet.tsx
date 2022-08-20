@@ -2,22 +2,16 @@ import { useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router-dom';
 import FullScreenLoading from './FullScreenLoading';
 
-const ProtectedOutlet = () => {
+const PublicOutlet = () => {
   const { auth } = useSelector((state: any) => state);
-
-  console.log(auth);
 
   return !!auth?.isLoading ? (
     <FullScreenLoading />
+  ) : !auth?.isLoggedIn ? (
+    <Outlet />
   ) : (
-    <>
-      {!!auth?.isLoggedIn ? (
-        <Outlet />
-      ) : (
-        <Navigate to="/login" replace={true} />
-      )}
-    </>
+    <Navigate to="/dashboard" replace={true} />
   );
 };
 
-export default ProtectedOutlet;
+export default PublicOutlet;

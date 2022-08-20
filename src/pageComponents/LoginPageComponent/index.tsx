@@ -1,54 +1,84 @@
-import { FC } from 'react';
-import { Button, Form, Input } from 'antd';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { FC, useState } from 'react';
+import { Button } from 'antd';
 
-import { MainWrapper, Heading, FormWrapper, Error } from './Styles';
+import { Input, InputErrorText } from '../../styles/common';
+import { IUserLoginData } from '../../constants/interfaces';
+import { handleLoginSubmit } from './functions';
+import { useDispatch } from 'react-redux';
+import { userLogin } from '../../redux/auth/action';
+
+import {
+  MainWrapper,
+  Heading,
+  FormWrapper,
+  SingleInputWrapper,
+  InputTitle,
+  ButtonWrapper,
+  RegisterButton,
+} from './Styles';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPageComponent: FC = () => {
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [error, setError] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [dataToSend, setDataToSend] = useState<IUserLoginData>({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setError('');
+    setDataToSend((prevState: IUserLoginData) => {
+      return {
+        ...prevState,
+        [e.target.name]: e.target.value,
+      };
+    });
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
+  const handleSubmit = () => {
+    if (handleLoginSubmit({ dataToSend, setError })) {
+      dispatch(userLogin(dataToSend, setIsLoading, navigate));
+    } else {
+      console.error(error);
+    }
   };
+
   return (
     <>
       <MainWrapper>
         <FormWrapper>
-          <Heading>Login</Heading>{' '}
-          <Form
-            name="basic"
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 18 }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
-          >
-            <Form.Item
-              label="Email"
-              name="Email"
-              rules={[{ required: true, message: 'Please input your email!' }]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Password"
+          <Heading>Login</Heading>
+          <SingleInputWrapper>
+            <InputTitle>Email:</InputTitle>
+            <Input
+              type="email"
+              name="email"
+              value={dataToSend.email}
+              onChange={handleChange}
+              placeholder="Enter your email"
+            />
+          </SingleInputWrapper>
+          <SingleInputWrapper>
+            <InputTitle>Password:</InputTitle>
+            <Input
               name="password"
-              rules={[
-                { required: true, message: 'Please input your password!' },
-              ]}
-            >
-              <Input.Password />
-            </Form.Item>
-            {/* <Error>something</Error> */}
-
-            <Form.Item wrapperCol={{ offset: 8, span: 8 }}>
-              <Button type="primary" htmlType="submit">
-                Submit
-              </Button>
-            </Form.Item>
-          </Form>
+              value={dataToSend.password}
+              onChange={handleChange}
+              type="password"
+              placeholder="Enter your password"
+            />
+          </SingleInputWrapper>
+          <InputErrorText>{error}</InputErrorText>
+          <ButtonWrapper>
+            <RegisterButton to="/register">Register Now</RegisterButton>
+            <Button type="primary" onClick={handleSubmit}>
+              {isLoading ? 'Processing' : 'Login'}
+            </Button>
+          </ButtonWrapper>
         </FormWrapper>
       </MainWrapper>
     </>

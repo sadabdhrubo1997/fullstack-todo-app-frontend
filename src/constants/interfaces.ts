@@ -22,3 +22,13 @@ export interface ISubTaskToAdd {
 export type TTodosCategory = 'all' | 'ongoing' | 'paused' | 'done';
 
 export type TTodoStatus = 'new' | 'ongoing' | 'paused' | 'done';
+
+export interface IUserLoginData {
+  email: string;
+  password: string;
+}
+
+export interface IUserRegistrationData extends IUserLoginData {
+  firstName: string;
+  lastName: string;
+}

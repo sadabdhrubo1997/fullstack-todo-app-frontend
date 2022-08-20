@@ -1,36 +1,29 @@
-import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
 import { Dropdown, Menu } from 'antd';
 import styled from 'styled-components';
+
 import DownArrow1 from '../icons/DownArrow1';
+import ProfileOption from './MenuOption/ProfileOption';
+import LogoutOption from './MenuOption/LogoutOption';
 
 const menu = (
   <Menu
     items={[
       {
         key: '1',
-        label: (
-          <span onClick={() => console.log(' hello')}>
-            <UserOutlined />
-            &nbsp; Profile
-          </span>
-        ),
+        label: <ProfileOption />,
       },
       {
         key: '2',
-        label: <span>Logout</span>,
-        icon: <LogoutOutlined />,
+        label: <LogoutOption />,
       },
     ]}
   />
 );
 
-/*
-animate={{ x: 0 }}
-initial={{ x: -220 }}
-transition={{ delay: 1 }}
-exit={{ x: -220, transition: { duration: 0.2 } }}
-*/
 const Avatar = () => {
+  const { auth } = useSelector((state: any) => state);
+
   return (
     <>
       <Dropdown trigger={['click']} overlay={menu} placement="bottomRight">
@@ -38,7 +31,9 @@ const Avatar = () => {
           <AvatarImage>
             <img src="/assets/images/avatar.png" alt="avatar" />
           </AvatarImage>
-          <UserName>User Name</UserName>
+          <UserName>
+            {auth?.user?.firstName + ' ' + auth?.user?.lastName}
+          </UserName>
           <DownArrowIcon>
             <DownArrow1 />
           </DownArrowIcon>
