@@ -2,7 +2,7 @@ import { useState } from 'react';
 import CreateTodoPageComponent from '../../pageComponents/CreateTodoPageComponent';
 
 const CreateTodoPage = () => {
-  const [isCreateTodoPageLoading, setIsCreateTodoPageLoading] =
+  const [, setIsCreateTodoPageLoading] =
     useState<boolean>(false);
 
   return (
