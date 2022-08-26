@@ -12,11 +12,11 @@ import TodosWrapper from './todosWrapper';
 const LIMIT: number = 10;
 
 const TodoPageComponent = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [todoCategory, setTodoCategory] = useState<TTodosCategory>('all');
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [count, setCount] = useState<number>(300);
-  const [todos, setTodos] = useState<any[]>([]);
+  const [, setCurrentPage] = useState<number>(1);
+  const [count] = useState<number>(300);
+  // const [todos, setTodos] = useState<any[]>([]);
 
   const handlePagination = (page: number, pageSize: number) => {
     setCurrentPage(page);
