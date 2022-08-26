@@ -1,8 +1,14 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import CreateTodoButton from '../../components/CreateTodoButton';
 import DashboardLayout from '../../layout/DashboardLayout';
+import { scrollToTop } from '../../utils/scrollToTop';
 
 const DashboardPageComponent = () => {
+  useEffect(() => {
+    scrollToTop();
+  }, []);
+
   return (
     <>
       <DashboardLayout>

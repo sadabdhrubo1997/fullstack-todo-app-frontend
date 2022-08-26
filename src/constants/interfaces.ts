@@ -32,3 +32,8 @@ export interface IUserRegistrationData extends IUserLoginData {
   firstName: string;
   lastName: string;
 }
+
+
+export interface ICreateTodo{
+
+}

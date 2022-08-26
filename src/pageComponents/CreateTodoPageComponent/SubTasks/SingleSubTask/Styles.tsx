@@ -23,7 +23,7 @@ export const SingleSubTaskHeading = styled.h3`
   max-width: calc(100% - 180px);
 `;
 
-export const Description = styled.p`
+export const Description = styled.div`
   font-size: 16px;
   line-height: 1.6;
   color: var(--color-primary);
@@ -35,8 +35,6 @@ export const Description = styled.p`
     display: block;
     font-weight: 600;
   }
-
- 
 
   b {
     cursor: pointer;

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Button } from 'antd';
 
 import { Input, InputErrorText } from '../../styles/common';
@@ -18,12 +18,12 @@ import {
   RegisterButton,
 } from './Styles';
 import { useNavigate } from 'react-router-dom';
+import { scrollToTop } from '../../utils/scrollToTop';
 
 const LoginPageComponent: FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [error, setError] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [dataToSend, setDataToSend] = useState<IUserLoginData>({
     email: '',
     password: '',
@@ -41,11 +41,17 @@ const LoginPageComponent: FC = () => {
 
   const handleSubmit = () => {
     if (handleLoginSubmit({ dataToSend, setError })) {
-      dispatch(userLogin(dataToSend, setIsLoading, navigate));
+      dispatch(userLogin(dataToSend, navigate));
     } else {
       console.error(error);
     }
   };
+
+
+  useEffect(() => {
+    scrollToTop();
+  }, []);
+
 
   return (
     <>
@@ -76,7 +82,7 @@ const LoginPageComponent: FC = () => {
           <ButtonWrapper>
             <RegisterButton to="/register">Register Now</RegisterButton>
             <Button type="primary" onClick={handleSubmit}>
-              {isLoading ? 'Processing' : 'Login'}
+              Login
             </Button>
           </ButtonWrapper>
         </FormWrapper>

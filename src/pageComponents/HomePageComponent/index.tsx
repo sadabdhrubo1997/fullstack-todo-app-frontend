@@ -6,6 +6,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { scrollToTop } from '../../utils/scrollToTop';
 
 const antIcon = <LoadingOutlined style={{ fontSize: 60 }} spin />;
 
@@ -27,6 +28,10 @@ const HomePageComponent: FC = () => {
   useEffect(() => {
     handleRedirection();
   }, [auth.isLoading]);
+
+  useEffect(() => {
+    scrollToTop();
+  }, []);
 
   return (
     <Wrapper>

@@ -1,9 +1,10 @@
 import { Pagination } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TTodosCategory } from '../../constants/interfaces';
 import DashboardLayout from '../../layout/DashboardLayout';
 
 import { handleTodosPageHeadingByCategory } from '../../utils/handleTodosPageHeadingByCategory';
+import { scrollToTop } from '../../utils/scrollToTop';
 import FilterDropdown from './FilterDropdown';
 import { PaginationWrapper, WrapperTop } from './Styles';
 import TodosWrapper from './todosWrapper';
@@ -22,30 +23,34 @@ const TodoPageComponent = () => {
     console.log({ page, pageSize });
   };
 
+  useEffect(() => {
+    scrollToTop();
+  }, []);
+
   return (
     <>
-        <DashboardLayout>
-          <WrapperTop>
-            <h2> {handleTodosPageHeadingByCategory(todoCategory)}</h2>
-            <FilterDropdown
-              todoCategory={todoCategory}
-              setTodoCategory={setTodoCategory}
-            />
-          </WrapperTop>
+      <DashboardLayout>
+        <WrapperTop>
+          <h2> {handleTodosPageHeadingByCategory(todoCategory)}</h2>
+          <FilterDropdown
+            todoCategory={todoCategory}
+            setTodoCategory={setTodoCategory}
+          />
+        </WrapperTop>
 
-          <TodosWrapper />
+        <TodosWrapper />
 
-          <PaginationWrapper>
-            <Pagination
-              total={count}
-              responsive={true}
-              hideOnSinglePage={true}
-              defaultPageSize={LIMIT}
-              defaultCurrent={1}
-              onChange={handlePagination}
-            />
-          </PaginationWrapper>
-        </DashboardLayout>
+        <PaginationWrapper>
+          <Pagination
+            total={count}
+            responsive={true}
+            hideOnSinglePage={true}
+            defaultPageSize={LIMIT}
+            defaultCurrent={1}
+            onChange={handlePagination}
+          />
+        </PaginationWrapper>
+      </DashboardLayout>
     </>
   );
 };

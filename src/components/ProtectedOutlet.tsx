@@ -5,8 +5,6 @@ import FullScreenLoading from './FullScreenLoading';
 const ProtectedOutlet = () => {
   const { auth } = useSelector((state: any) => state);
 
-  console.log(auth);
-
   return !!auth?.isLoading ? (
     <FullScreenLoading />
   ) : (

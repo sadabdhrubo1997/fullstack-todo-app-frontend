@@ -1,7 +1,7 @@
 import { Modal } from 'antd';
 import { useState } from 'react';
 import { ISubTaskCreate } from '../../../../constants/interfaces';
-import { Input, Textarea } from '../../../../styles/common';
+import { Input, InputErrorText, Textarea } from '../../../../styles/common';
 import { InputTitle, SingleInputWrapper } from '../../Styles';
 
 interface IProps {
@@ -19,10 +19,30 @@ const SubTaskEditModal = ({
   subTasks,
   setSubTasks,
 }: IProps) => {
+  const [error, setError] = useState('');
   const [title, setTitle] = useState<string>(data?.title);
   const [description, setDescription] = useState<string>(data?.description);
 
   const handleEditSubTaskWithOk = () => {
+    if (!title) {
+      setError('Please enter the Sub Task Title');
+      return;
+    }
+    if (!description) {
+      setError('Please enter the Sub Task Description');
+      return;
+    }
+
+    if (title.length > 100) {
+      setError('Title can not be more then 100 characters');
+      return;
+    }
+
+    if (description.length > 1000) {
+      setError('Description can not be more then 1000 characters');
+      return;
+    }
+
     const subTaskIndex = subTasks.findIndex(
       (st: ISubTaskCreate) => st?.id === data?.id
     );
@@ -50,9 +70,10 @@ const SubTaskEditModal = ({
           <Input
             name="title"
             value={title}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setTitle(e.target.value)
-            }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setError('');
+              setTitle(e.target.value);
+            }}
             placeholder="Enter todo title here..."
           />
         </SingleInputWrapper>
@@ -61,12 +82,14 @@ const SubTaskEditModal = ({
           <Textarea
             name="description"
             value={description}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setDescription(e.target.value)
-            }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setError('');
+              setDescription(e.target.value);
+            }}
             placeholder="Enter todo description here..."
           />
         </SingleInputWrapper>
+        <InputErrorText>{error}</InputErrorText>
       </Modal>
     </>
   );

@@ -8,6 +8,7 @@ import App from './App';
 import rootReducers from './redux/rootReducers';
 import reportWebVitals from './reportWebVitals';
 // import 'antd/dist/antd.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 import './styles/App.less';
 import './styles/main.scss';
 
@@ -17,11 +18,11 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-    <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </BrowserRouter>
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

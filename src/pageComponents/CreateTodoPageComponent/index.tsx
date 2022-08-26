@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ICreateTask, ISubTaskCreate } from '../../constants/interfaces';
-import { Button, Input, Textarea } from '../../styles/common';
+import { Button, Input, InputErrorText, Textarea } from '../../styles/common';
 
 import {
   AddSubTaskButton,
@@ -15,12 +15,15 @@ import {
 import SubTaskCreateModal from './SubTaskCreateModal';
 import SubTasks from './SubTasks';
 import DashboardLayout from './../../layout/DashboardLayout';
+import { scrollToTop } from '../../utils/scrollToTop';
 
 interface IProps {
   setIsCreateTodoPageLoading: (v: boolean) => void;
 }
 
 const CreateTodoPageComponent = ({ setIsCreateTodoPageLoading }: IProps) => {
+  const [error, setError] = useState('');
+
   // modal visibility state
   const [showSubTaskCreateModal, setShowSubTaskCreateModal] =
     useState<boolean>(false);
@@ -41,6 +44,7 @@ const CreateTodoPageComponent = ({ setIsCreateTodoPageLoading }: IProps) => {
   };
 
   const handleTodoInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setError('');
     setTodo((prevState: ICreateTask) => {
       return {
         ...prevState,
@@ -50,9 +54,32 @@ const CreateTodoPageComponent = ({ setIsCreateTodoPageLoading }: IProps) => {
   };
 
   const handleCreateTodo: () => void = () => {
+    if (!todo.title) {
+      setError('Please enter the Todo Title.');
+      return;
+    }
+    if (!todo.description) {
+      setError('Please enter the Todo Description.');
+      return;
+    }
+
+    if (todo.title.length > 100) {
+      setError('Title can not be more then 100 characters');
+      return;
+    }
+
+    if (todo.description.length > 1000) {
+      setError('Description can not be more then 1000 characters');
+      return;
+    }
+
     console.log(todo);
     console.log(subTasks);
   };
+
+  useEffect(() => {
+    scrollToTop();
+  }, []);
 
   return (
     <>
@@ -90,6 +117,7 @@ const CreateTodoPageComponent = ({ setIsCreateTodoPageLoading }: IProps) => {
                 Add Sub Task
               </AddSubTaskButton>
             </AddSubTaskButtonWrapper>
+            <InputErrorText>{error}</InputErrorText>
           </SubTaskWrapper>
 
           <Button onClick={handleCreateTodo}>Create Todo</Button>

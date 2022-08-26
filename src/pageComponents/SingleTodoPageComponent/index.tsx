@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ISubTaskToAdd } from '../../constants/interfaces';
 import DashboardLayout from '../../layout/DashboardLayout';
+import { scrollToTop } from '../../utils/scrollToTop';
 
 import {
   AddSubTaskButton,
@@ -45,6 +46,10 @@ const SingleTodoPageComponent = () => {
     tempArr.push(subTaskValue);
     setSubTasksToAdd(tempArr);
   };
+
+  useEffect(() => {
+    scrollToTop();
+  }, []);
 
   return (
     <>

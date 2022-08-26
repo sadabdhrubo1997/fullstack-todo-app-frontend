@@ -1,7 +1,13 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import DashboardLayout from '../../layout/DashboardLayout';
+import { scrollToTop } from '../../utils/scrollToTop';
 
 const TrashPageComponent = () => {
+  useEffect(() => {
+    scrollToTop();
+  }, []);
+
   return (
     <>
       <DashboardLayout>
